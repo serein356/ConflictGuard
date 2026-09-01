@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conflictguard"
+version = "0.1.0"
+description = "Conflict-aware termination for multimodal GUI agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dependencies = [
+  "numpy>=1.26",
+  "Pillow>=10.0",
+  "scikit-learn>=1.4",
+  "torch>=2.8.0",
+  "tqdm>=4.66",
+  "transformers>=5.2.0",
+]
+
+[project.optional-dependencies]
+qwen = ["qwen-vl-utils>=0.0.14"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+conflictguard-eval = "conflictguard.eval.run_eval_steered:main"
+conflictguard-extract = "conflictguard.vectors.extract:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

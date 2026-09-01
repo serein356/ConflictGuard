@@ -1,0 +1,52 @@
+{
+  "qwen3vl-4b": {
+    "adapter": "qwen3vl",
+    "vector_dir": "qwen3vl-4b",
+    "behavior_vector": "behavior.pt",
+    "condition_c1_layer": 28,
+    "condition_c2_layer": 28,
+    "condition_threshold": 0.20,
+    "behavior_strength": 5.0,
+    "behavior_layers": "20,21,22,23,24,25,26"
+  },
+  "qwen3vl-8b": {
+    "adapter": "qwen3vl",
+    "vector_dir": "qwen3vl-8b",
+    "behavior_vector": "behavior.pt",
+    "condition_c1_layer": 27,
+    "condition_c2_layer": 27,
+    "condition_threshold": 0.10,
+    "behavior_strength": 6.0,
+    "behavior_layers": "20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35"
+  },
+  "qwen3vl-32b": {
+    "adapter": "qwen3vl",
+    "vector_dir": "qwen3vl-32b",
+    "behavior_vector": "behavior.pt",
+    "condition_c1_layer": 55,
+    "condition_c2_layer": 50,
+    "condition_threshold": 0.08,
+    "behavior_strength": 6.0,
+    "behavior_layers": "40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55"
+  },
+  "ui-venus-8b": {
+    "adapter": "uivenus",
+    "vector_dir": "ui-venus-8b",
+    "behavior_vector": "behavior.pt",
+    "condition_c1_layer": 28,
+    "condition_c2_layer": 24,
+    "condition_threshold": 0.10,
+    "behavior_strength": 5.0,
+    "behavior_layers": "15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32"
+  },
+  "ui-tars-7b": {
+    "adapter": "uitars",
+    "vector_dir": "ui-tars-7b",
+    "behavior_vector": "behavior.pt",
+    "condition_c1_layer": 20,
+    "condition_c2_layer": 20,
+    "condition_threshold": 0.10,
+    "behavior_strength": 6.0,
+    "behavior_layers": "15,16,17,18,19,20,21"
+  }
+}
