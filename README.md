@@ -1,6 +1,7 @@
 # CONFLICTGUARD
 
-Core implementation of **Do GUI Agents Know When Not to Act? Enabling Conflict-Aware Termination for Multimodal GUI Agents**.
+Core implementation of **Do GUI Agents Know When Not to Act? Enabling Conflict-Aware Termination for Multimodal GUI Agents**.  
+
 [📄 Paper](https://arxiv.org/abs/2609.03438) | [🤗 Dataset: ConflictGUI](https://huggingface.co/datasets/serein356/ConflictGUI)
 
 This repository contains the CONFLICTGUARD method and its evaluator:
