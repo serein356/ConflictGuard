@@ -85,3 +85,6 @@ Paper hyperparameters for Qwen3-VL-4B/8B/32B, UI-Venus-1.5-8B, and UI-TARS-1.5-7
 - Conflict: `terminate` with `status=failure`.
 
 Code is released under the Apache License 2.0. Dataset images and upstream model artifacts remain subject to their original licenses.
+
+## Acknowledgements
+Thanks to **[Programming Refusal with Conditional Activation Steering (CAST)](https://github.com/IBM/activation-steering)** for inspiring this work.
