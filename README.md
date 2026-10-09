@@ -26,10 +26,47 @@ The paper environment used Python 3.10, CUDA 12.4, PyTorch 2.8.0, Transformers 5
 
 The code expects model-adapted JSON files containing paired `clean`, `conflict1`, and `conflict2` rows. Each row must provide `messages`, `images`, `action`, `task_id`, `dataset`, `data_type`, `imgwidth`, and `imgheight`.
 
+## Prepare ConflictGUI
+
+The Hugging Face release is model-neutral. Convert its `data/conflictgui.json`
+file into the exact vanilla and feasibility-prompting inputs used by the
+evaluator:
+
+```bash
+python scripts/prepare_conflictgui.py \
+  --input /path/to/ConflictGUI/data/conflictgui.json \
+  --output-dir prepared/conflictgui
+```
+
+The command creates calibration and test files for all supported model
+families:
+
+```text
+prepared/conflictgui/
+├── qwen3vl/{calibration,test}_{vanilla,feasibility}.json
+├── uitars/{calibration,test}_{vanilla,feasibility}.json
+└── uivenus/{calibration,test}_{vanilla,feasibility}.json
+```
+
+The complete, validated templates are stored in [`prompts/`](prompts/). The
+feasibility files differ from the vanilla files only by the model-adapted
+Critical Thinking instruction used in the paper.
+
+For all three model families, inference uses no explicit system message. The
+adapter sends one user turn whose multimodal content is ordered as image first
+and full prompt text second. In particular, Qwen3-VL receives the complete
+`mobile_use` tool specification as literal user text beginning with
+`The user query: {instruction}`. The tool specification is not passed as a
+system message or a separate `tools` argument.
+
+The evaluator only sends the user turn during generation. Reference assistant
+responses, when present in historical prepared files, are not model inputs at
+evaluation time.
+
 Set `CONFLICTGUI_ROOT` when image paths are relative:
 
 ```bash
-export CONFLICTGUI_ROOT=/path/to/prepared/conflictgui-workspace
+export CONFLICTGUI_ROOT=/path/to/ConflictGUI
 ```
 
 ## Extract vectors
@@ -52,7 +89,7 @@ Vanilla inference uses the original prompt data:
 ```bash
 scripts/evaluate.sh vanilla qwen3vl-8b \
   /path/to/Qwen3-VL-8B-Instruct \
-  /path/to/qwen3vl_test_vanilla.json \
+  prepared/conflictgui/qwen3vl/test_vanilla.json \
   outputs/qwen3vl_8b_vanilla.json 0
 ```
 
@@ -61,7 +98,7 @@ Feasibility prompting uses the enhanced prompt data without steering:
 ```bash
 scripts/evaluate.sh prompt qwen3vl-8b \
   /path/to/Qwen3-VL-8B-Instruct \
-  /path/to/qwen3vl_test_feasibility.json \
+  prepared/conflictgui/qwen3vl/test_feasibility.json \
   outputs/qwen3vl_8b_prompt.json 0
 ```
 
@@ -70,7 +107,7 @@ Full CONFLICTGUARD uses feasibility prompting and released steering vectors:
 ```bash
 scripts/evaluate.sh conflictguard qwen3vl-8b \
   /path/to/Qwen3-VL-8B-Instruct \
-  /path/to/qwen3vl_test_feasibility.json \
+  prepared/conflictgui/qwen3vl/test_feasibility.json \
   outputs/qwen3vl_8b_conflictguard.json 0
 ```
 
