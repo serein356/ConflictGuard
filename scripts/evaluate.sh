@@ -74,7 +74,7 @@ exec python -m conflictguard.eval.run_eval_steered \
   --condition_c1_layers "${C1_LAYER}" \
   --condition_c2_layers "${C2_LAYER}" \
   --condition_threshold "${THRESHOLD}" \
-  --condition_comparison_mode last \
+  --condition_comparison_mode mean \
   --device_id "${DEVICE_ID}" \
   --output "${OUTPUT}" \
   "$@"
